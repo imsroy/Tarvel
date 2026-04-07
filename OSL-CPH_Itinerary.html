@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scandinavia Journey · July 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --midnight: #0d1117;
+    --ink: #1a2332;
+    --fjord: #2a4a6b;
+    --glacier: #4a9eca;
+    --aurora: #52c4a0;
+    --gold: #e8c547;
+    --coral: #e87a52;
+    --fog: #f0f4f8;
+    --mist: #e2eaf3;
+    --text: #1a2332;
+    --soft: #5a7a9a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--fog);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--midnight) 0%, var(--ink) 40%, var(--fjord) 100%);
+    color: white;
+    padding: 60px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(74,158,202,0.25) 0%, transparent 70%),
+                radial-gradient(ellipse at 20% 80%, rgba(82,196,160,0.15) 0%, transparent 60%);
+  }
+  .hero-inner { position: relative; max-width: 900px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--aurora);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 72px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--glacier);
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+  }
+  .hero-meta span strong { color: white; margin-right: 6px; }
+
+  /* LEGEND */
+  .legend {
+    background: white;
+    border-bottom: 1px solid var(--mist);
+    padding: 16px 40px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 12px;
+  }
+  .legend-label { font-weight: 500; color: var(--soft); letter-spacing: 1px; text-transform: uppercase; font-size: 10px; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge-flight { background: rgba(232,122,82,0.12); color: var(--coral); border: 1px solid rgba(232,122,82,0.25); }
+  .badge-hotel  { background: rgba(74,158,202,0.12); color: var(--fjord); border: 1px solid rgba(74,158,202,0.25); }
+  .badge-tour   { background: rgba(82,196,160,0.12); color: #2a8a72; border: 1px solid rgba(82,196,160,0.25); }
+  .badge-dinner { background: rgba(232,197,71,0.15); color: #7a6010; border: 1px solid rgba(232,197,71,0.3); }
+  .badge-action { background: rgba(42,74,107,0.1); color: var(--fjord); border: 1px solid rgba(42,74,107,0.2); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* DAY CARD */
+  .day {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 28px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: slideIn 0.4s ease forwards;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .day:nth-child(1)  { animation-delay: 0.05s; }
+  .day:nth-child(2)  { animation-delay: 0.10s; }
+  .day:nth-child(3)  { animation-delay: 0.15s; }
+  .day:nth-child(4)  { animation-delay: 0.20s; }
+  .day:nth-child(5)  { animation-delay: 0.25s; }
+  .day:nth-child(6)  { animation-delay: 0.30s; }
+  .day:nth-child(7)  { animation-delay: 0.35s; }
+  .day:nth-child(8)  { animation-delay: 0.40s; }
+  .day:nth-child(9)  { animation-delay: 0.45s; }
+  .day:nth-child(10) { animation-delay: 0.50s; }
+  .day:nth-child(11) { animation-delay: 0.55s; }
+
+  /* LEFT COL: date */
+  .day-date {
+    text-align: right;
+    padding-top: 20px;
+    position: relative;
+  }
+  .day-date::after {
+    content: '';
+    position: absolute;
+    right: -18px;
+    top: 28px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--fjord);
+    border: 2px solid var(--fog);
+    z-index: 1;
+  }
+  .day:not(:last-child) .day-date::before {
+    content: '';
+    position: absolute;
+    right: -14px;
+    top: 38px;
+    width: 2px;
+    bottom: -20px;
+    background: var(--mist);
+  }
+  .day-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--fjord);
+    line-height: 1;
+  }
+  .day-weekday {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-top: 2px;
+  }
+  .day-month {
+    font-size: 10px;
+    color: var(--soft);
+  }
+
+  /* RIGHT COL: card */
+  .day-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--mist);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .day-card:hover { box-shadow: 0 8px 32px rgba(42,74,107,0.12); }
+
+  .card-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--mist);
+  }
+  .city-pill {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--fjord);
+    color: white;
+  }
+  .travel-label {
+    font-size: 13px;
+    color: var(--soft);
+  }
+  .card-body { padding: 18px 20px; }
+
+  /* ACTION ROWS */
+  .action-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .action-item.flight  { background: rgba(232,122,82,0.08); border-left: 3px solid var(--coral); }
+  .action-item.hotel   { background: rgba(74,158,202,0.08); border-left: 3px solid var(--glacier); }
+  .action-item.tour    { background: rgba(82,196,160,0.08); border-left: 3px solid var(--aurora); }
+  .action-item.dinner  { background: rgba(232,197,71,0.10); border-left: 3px solid var(--gold); }
+  .action-item.action  { background: rgba(42,74,107,0.05); border-left: 3px solid var(--fjord); }
+  .action-item.note    { background: var(--fog); border-left: 3px solid var(--mist); font-size: 12.5px; color: var(--soft); }
+
+  .action-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .action-content { flex: 1; }
+  .action-title { font-weight: 500; color: var(--text); }
+  .action-detail { font-size: 12px; color: var(--soft); margin-top: 3px; }
+  .ref {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 11px;
+    font-family: monospace;
+    background: rgba(42,74,107,0.08);
+    color: var(--fjord);
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .deadline {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--coral);
+  }
+
+  /* SIGHTS */
+  .sights-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: var(--fog);
+    border: 1px solid var(--mist);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--fjord);
+    user-select: none;
+    width: 100%;
+    text-align: left;
+  }
+  .sights-toggle:hover { background: var(--mist); }
+  .sights-toggle .chevron { margin-left: auto; transition: transform 0.2s; }
+  .sights-toggle.open .chevron { transform: rotate(180deg); }
+  .sights-body {
+    display: none;
+    margin-top: 8px;
+    padding: 12px 14px;
+    background: var(--fog);
+    border-radius: 8px;
+    border: 1px solid var(--mist);
+  }
+  .sights-body.open { display: block; }
+  .sights-list { list-style: none; columns: 2; gap: 12px; }
+  .sights-list li {
+    font-size: 12.5px;
+    color: var(--text);
+    padding: 3px 0 3px 16px;
+    position: relative;
+    break-inside: avoid;
+  }
+  .sights-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--glacier);
+    font-size: 11px;
+    top: 4px;
+  }
+  .sights-title {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--soft);
+    margin-bottom: 8px;
+  }
+
+  /* TRANSIT DAY */
+  .transit-banner {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .transit-route {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .transit-detail { font-size: 13px; color: var(--soft); margin-top: 2px; }
+
+  /* SECTION HEADERS */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+  .section-divider h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--soft);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--mist);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 60px; }
+    .legend { padding: 12px 20px; }
+    main { padding: 24px 16px 60px; }
+    .day { grid-template-columns: 60px 1fr; gap: 0 16px; }
+    .day-num { font-size: 24px; }
+    .sights-list { columns: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">✈ Family Travel · 10 Days</p>
+    <h1>Oslo · Flåm · Bergen<br><em>Stockholm · Copenhagen</em></h1>
+    <div class="hero-meta">
+      <span><strong>Departs</strong> July 20, 2026</span>
+      <span><strong>Returns</strong> July 30, 2026</span>
+      <span><strong>Travelers</strong> 3 Adults</span>
+      <span><strong>Route</strong> LAX → OSL → BGO → ARN → CPH → LAX</span>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="legend-label">Key</span>
+  <span class="badge badge-flight">✈ Flight</span>
+  <span class="badge badge-hotel">🏨 Hotel</span>
+  <span class="badge badge-tour">🗺 Booked Tour</span>
+  <span class="badge badge-dinner">🍽 Dining</span>
+  <span class="badge badge-action">⚡ Action Required</span>
+</div>
+
+<main>
+
+  <!-- ──── Day 0 ──── -->
+  <div class="section-divider"><h2>Departure</h2></div>
+
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">20</div>
+      <div class="day-weekday">Mon</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">LAX → OSL</span>
+        <span class="travel-label">Overnight Flight</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item flight">
+            <span class="action-icon">✈</span>
+            <div class="action-content">
+              <div class="action-title">Depart LAX 7:10 PM → Arrive Oslo 6:10 PM (next day)</div>
+              <div class="action-detail">Booking ref: <span class="ref">C7XX2U</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── OSLO ──── -->
+  <div class="section-divider"><h2>Oslo · 2 Nights</h2></div>
+
+  <!-- Day 1 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">21</div>
+      <div class="day-weekday">Tue</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Oslo</span>
+        <span class="travel-label">Arrive &amp; Explore</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item hotel">
+            <span class="action-icon">🏨</span>
+            <div class="action-content">
+              <div class="action-title">Radisson Blu Plaza Hotel, Oslo</div>
+              <div class="action-detail">$581 · Booking.com <span class="ref">5874080319</span></div>
+              <div class="deadline">⚠ Cancel before July 19th</div>
+            </div>
+          </li>
+          <li class="action-item action">
+            <span class="action-icon">🚶</span>
+            <div class="action-content">
+              <div class="action-title">Oslo Waterfront Stroll — Aker Brygge → Tjuvholmen</div>
+              <div class="action-detail">Arrive, get oriented, take in the harbor</div>
+            </div>
+          </li>
+          <li class="action-item dinner">
+            <span class="action-icon">🍽</span>
+            <div class="action-content">
+              <div class="action-title">Dinner — choose one</div>
+              <div class="action-detail"><strong>Rorbua</strong> — authentic, cozy, very Norwegian<br>
+              <strong>Lofoten</strong> — best seafood, classic harbor feel<br>
+              <strong>Louise</strong> — easiest with teens + big terrace</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 2 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">22</div>
+      <div class="day-weekday">Wed</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Oslo</span>
+        <span class="travel-label">Full Day</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">🌅</span>
+            <div class="action-content">
+              <div class="action-title">Morning — Self-guided city exploration</div>
+              <div class="action-detail">See recommended sights below (excluding those on the afternoon walking tour)</div>
+            </div>
+          </li>
+          <li class="action-item tour">
+            <span class="action-icon">🗺</span>
+            <div class="action-content">
+              <div class="action-title">Best of Oslo Walking Tour · 2:00 PM (3 hours)</div>
+              <div class="action-detail">Small group, max 10 people · 3 Adults · $145.65 total ($48.55 × 3)<br>
+              Booking ref: <span class="ref">BR-1343602909</span> · Card charged on July 20, 2026</div>
+            </div>
+          </li>
+          <li class="action-item action">
+            <span class="action-icon">🌙</span>
+            <div class="action-content">
+              <div class="action-title">Evening — 2 hr rest at hotel, then dinner + stroll</div>
+              <div class="action-detail"><strong>Dinner options:</strong> Remaining restaurant from Day 1 OR Båthuset Sørenga (top pick, ~12 min walk)<br>
+              <strong>After dinner:</strong> Walk Tjuvholmen &amp; Sørenga, or climb the Opera House roof</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── FLÅM ──── -->
+  <div class="section-divider"><h2>Flåm · 1 Night — Norway in a Nutshell (Part 1)</h2></div>
+
+  <!-- Day 3 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">23</div>
+      <div class="day-weekday">Thu</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Oslo → Flåm</span>
+        <span class="travel-label">Train Journey</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">⚡</span>
+            <div class="action-content">
+              <div class="action-title">Buy train tickets Oslo → Flåm on Vy.no</div>
+              <div class="action-detail">Single ticket · Opens 90 days prior — <strong>Buy on April 23rd</strong></div>
+            </div>
+          </li>
+          <li class="action-item flight">
+            <span class="action-icon">🚂</span>
+            <div class="action-content">
+              <div class="action-title">Train departs 8:25 AM → Arrive Flåm ~2:00 PM</div>
+              <div class="action-detail">Check in at hotel or drop bags on arrival</div>
+            </div>
+          </li>
+          <li class="action-item hotel">
+            <span class="action-icon">🏨</span>
+            <div class="action-content">
+              <div class="action-title">Flåm Marina &amp; Apartments</div>
+              <div class="action-detail">NOK 4,090 (~$404) · <span class="ref">Roy_251208072049327580</span></div>
+              <div class="deadline">⚠ Cancel by July 20th</div>
+            </div>
+          </li>
+          <li class="action-item dinner">
+            <span class="action-icon">🍺</span>
+            <div class="action-content">
+              <div class="action-title">Afternoon snack at Ægir BrewPub</div>
+            </div>
+          </li>
+          <li class="action-item tour">
+            <span class="action-icon">🗺</span>
+            <div class="action-content">
+              <div class="action-title">Stegastein Viewpoint Tour — Bus Stop C, 5:00 PM</div>
+              <div class="action-detail">Buy tickets on arrival · <a href="https://www.norwaysbest.com/en/flam/things-to-do/stegastein-viewpoint" style="color:var(--glacier)">norwaysbest.com</a></div>
+            </div>
+          </li>
+          <li class="action-item action">
+            <span class="action-icon">🌊</span>
+            <div class="action-content">
+              <div class="action-title">Stroll along the fjord waterfront</div>
+              <div class="action-detail">Dinner at Flåm Marina &amp; Apartments restaurant</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── BERGEN ──── -->
+  <div class="section-divider"><h2>Bergen · 2 Nights — Norway in a Nutshell (Part 2)</h2></div>
+
+  <!-- Day 4 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">24</div>
+      <div class="day-weekday">Fri</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Flåm → Bergen</span>
+        <span class="travel-label">Fjord Cruise + Train</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">⚡</span>
+            <div class="action-content">
+              <div class="action-title">Book Fjord Cruise (Nærøyfjord) — departs 9:00 AM</div>
+              <div class="action-detail">Call: <a href="https://www.norwaysbest.com/things-to-do/fjords/fjord-cruise-naeroyfjord/#booknow" style="color:var(--glacier)">norwaysbest.com</a><br>
+              Also buy bus + train tickets Bergen on Vy.no</div>
+            </div>
+          </li>
+          <li class="action-item flight">
+            <span class="action-icon">⛵</span>
+            <div class="action-content">
+              <div class="action-title">Fjord cruise → arrive Bergen ~2:00 PM</div>
+              <div class="action-detail">Check in hotel, freshen up</div>
+            </div>
+          </li>
+          <li class="action-item hotel">
+            <span class="action-icon">🏨</span>
+            <div class="action-content">
+              <div class="action-title">Magic Kloverhuset Harbour Hotel</div>
+              <div class="action-detail">Junior Suite <span class="ref">1HXTTHQY</span> · $484</div>
+              <div class="deadline">⚠ Cancel by July 22nd</div>
+            </div>
+          </li>
+          <li class="action-item tour">
+            <span class="action-icon">🗺</span>
+            <div class="action-content">
+              <div class="action-title">Bergen: Past &amp; Present Walking Tour — 6:00 PM</div>
+              <div class="action-detail">Small group · Booking ref: <span class="ref">GYG9967LYWRZ</span></div>
+              <div class="deadline">⚠ Cancel before July 21st</div>
+            </div>
+          </li>
+          <li class="action-item dinner">
+            <span class="action-icon">🍽</span>
+            <div class="action-content">
+              <div class="action-title">Dinner — TBD</div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="sights-toggle" onclick="toggleSights(this)">
+          📍 Bergen Must-See Attractions <span class="chevron">▼</span>
+        </button>
+        <div class="sights-body">
+          <div class="sights-title">Absolute Must-Sees</div>
+          <ul class="sights-list">
+            <li><strong>Bryggen</strong> (UNESCO) — colorful wooden wharf, walk the alleys early or late</li>
+            <li><strong>Fish Market (Fisketorget)</strong> — fish soup, salmon, king crab</li>
+            <li><strong>Mount Fløyen Funicular</strong> — best views, ~1.5 hrs, great at sunset</li>
+            <li><strong>Bergenhus Fortress</strong> — Håkon's Hall + Rosenkrantz Tower</li>
+            <li>Bryggen Museum (short, great context)</li>
+            <li>St. Mary's Church (oldest building in Bergen)</li>
+          </ul>
+          <div class="sights-title" style="margin-top:12px">If You Have More Time</div>
+          <ul class="sights-list">
+            <li><strong>Mount Ulriken Cable Car</strong> — bigger views than Fløyen</li>
+            <li><strong>Nordnes Peninsula</strong> — quiet, local, coastal paths</li>
+            <li><strong>KODE Museums</strong> — Edvard Munch, Norwegian design (good rainy day option)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 5 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">25</div>
+      <div class="day-weekday">Sat</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Bergen</span>
+        <span class="travel-label">Full Day</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">🥾</span>
+            <div class="action-content">
+              <div class="action-title">Morning — Hike to Mount Fløyen</div>
+              <div class="action-detail">Enjoy views of Bergen and the fjords from the top</div>
+            </div>
+          </li>
+          <li class="action-item tour">
+            <span class="action-icon">🚡</span>
+            <div class="action-content">
+              <div class="action-title">Mount Ulriken Cable Car — Booked via GetYourGuide</div>
+              <div class="action-detail">Booking ref: <span class="ref">GYGG454AH2BR</span></div>
+              <div class="deadline">⚠ Cancel before July 21st · Call to confirm timing</div>
+            </div>
+          </li>
+          <li class="action-item dinner">
+            <span class="action-icon">🍽</span>
+            <div class="action-content">
+              <div class="action-title">Lunch, Local Cruise, Dinner — TBD</div>
+              <div class="action-detail">Reference: <a href="https://www.norwaysbest.com/en/inspiration/24-hours-in-bergen-discover-norway-s-second-largest-city-in-a-day" style="color:var(--glacier)">24 hours in Bergen guide</a></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── STOCKHOLM ──── -->
+  <div class="section-divider"><h2>Stockholm · 2 Nights</h2></div>
+
+  <!-- Day 6 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">26</div>
+      <div class="day-weekday">Sun</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Bergen → Stockholm</span>
+        <span class="travel-label">Flight Day</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">🚋</span>
+            <div class="action-content">
+              <div class="action-title">Bybanen (Light Rail) to Bergen Airport (BGO)</div>
+              <div class="action-detail">From Byparken / Nonneseter · ~45 min · ~40–45 NOK/person · Buy on Skyss App</div>
+            </div>
+          </li>
+          <li class="action-item flight">
+            <span class="action-icon">✈</span>
+            <div class="action-content">
+              <div class="action-title">SAS SK898 · BGO 10:25 AM → ARN 11:45 AM</div>
+              <div class="action-detail">Booking ref: <span class="ref">YJA2UP</span></div>
+            </div>
+          </li>
+          <li class="action-item hotel">
+            <span class="action-icon">🏨</span>
+            <div class="action-content">
+              <div class="action-title">Radisson Collection Strand Hotel, Stockholm</div>
+              <div class="action-detail">$723 · Booking.com <span class="ref">6058718427</span></div>
+              <div class="deadline">⚠ Cancel by July 24th</div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="sights-toggle" onclick="toggleSights(this)">
+          📍 Stockholm Highlights <span class="chevron">▼</span>
+        </button>
+        <div class="sights-body">
+          <ul class="sights-list">
+            <li>Museum of Photography</li>
+            <li>Stockholm Old Town (Gamla Stan)</li>
+            <li>Royal Palace of Stockholm</li>
+            <li>Riddarholm Church</li>
+            <li>Stockholm City Hall</li>
+            <li>Skansen Open Air Museum</li>
+            <li>ABBA Museum</li>
+            <li>The Vasa Museum</li>
+            <li>Museum of Modern Art</li>
+            <li>Waterfront Walk</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 7 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">27</div>
+      <div class="day-weekday">Mon</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Stockholm</span>
+        <span class="travel-label">Full Day — Self-Guided</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item note">
+            <span class="action-icon">💡</span>
+            <div class="action-content">
+              <div class="action-title">Skip the guided walking tour — use that budget for attraction admission tickets instead</div>
+              <div class="action-detail">Explore the sights listed above at your own pace</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── COPENHAGEN ──── -->
+  <div class="section-divider"><h2>Copenhagen · 2 Nights</h2></div>
+
+  <!-- Day 8 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">28</div>
+      <div class="day-weekday">Tue</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Stockholm → Copenhagen</span>
+        <span class="travel-label">Flight Day</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">🚕</span>
+            <div class="action-content">
+              <div class="action-title">Taxi from hotel to Arlanda (ARN)</div>
+              <div class="action-detail">Taxi Stockholm or Taxi Kurir · Allow ample time for security</div>
+            </div>
+          </li>
+          <li class="action-item flight">
+            <span class="action-icon">✈</span>
+            <div class="action-content">
+              <div class="action-title">SAS SK0403 · ARN 9:00 AM → CPH 10:10 AM</div>
+              <div class="action-detail">Booking ref: <span class="ref">GYTW8W</span></div>
+            </div>
+          </li>
+          <li class="action-item hotel">
+            <span class="action-icon">🏨</span>
+            <div class="action-content">
+              <div class="action-title">Radisson Blu Scandinavia Hotel, Copenhagen</div>
+              <div class="action-detail">$788 · Booking.com <span class="ref">5831399518</span></div>
+              <div class="deadline">⚠ Cancel before July 26th</div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="sights-toggle" onclick="toggleSights(this)">
+          📍 Copenhagen Highlights <span class="chevron">▼</span>
+        </button>
+        <div class="sights-body">
+          <ul class="sights-list">
+            <li>Little Mermaid</li>
+            <li>Frederiks Church (Marble Church)</li>
+            <li>Amalienborg Palace</li>
+            <li>Nyhavn</li>
+            <li>Christiansborg Palace</li>
+            <li>Town Hall</li>
+            <li>National Museum</li>
+            <li>Round Tower</li>
+            <li>Rosenborg Castle</li>
+            <li>National Gallery of Denmark</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day 9 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">29</div>
+      <div class="day-weekday">Wed</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">Copenhagen</span>
+        <span class="travel-label">Full Day — Free Explore</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item action">
+            <span class="action-icon">🏛</span>
+            <div class="action-content">
+              <div class="action-title">Explore Copenhagen sights at your own pace</div>
+              <div class="action-detail">See the highlights listed above — Nyhavn is a great base to start from</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── DEPARTURE ──── -->
+  <div class="section-divider"><h2>Return Home</h2></div>
+
+  <!-- Day 10 -->
+  <div class="day">
+    <div class="day-date">
+      <div class="day-num">30</div>
+      <div class="day-weekday">Thu</div>
+      <div class="day-month">Jul</div>
+    </div>
+    <div class="day-card">
+      <div class="card-header">
+        <span class="city-pill">CPH → LAX</span>
+        <span class="travel-label">Homeward Bound</span>
+      </div>
+      <div class="card-body">
+        <ul class="action-list">
+          <li class="action-item flight">
+            <span class="action-icon">✈</span>
+            <div class="action-content">
+              <div class="action-title">Depart Copenhagen 2:15 PM → Arrive LAX 4:50 PM</div>
+              <div class="action-detail">Head to airport with plenty of time — enjoy a final Danish pastry ☕</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+function toggleSights(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
